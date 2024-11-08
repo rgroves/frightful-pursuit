@@ -1,34 +1,26 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+    <div className="app-container">
+      <header>
+        <div className="logo fade-in">
+          <span className="logo-text creepy">Fearful Pursuit</span>
+        </div>
+      </header>
+      <main>
         <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+          Welcome to Frightful Pursuit! Can you survive the terror-filled trivia
+          and reach the end before an icon of horror catches you?
         </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      </main>
+      <footer>
+        <p>
+          Made with ❤️, 🧠, and ☕ in Chicago, IL, USA - using Astro, React,
+          TypeScript, and Convex.
+        </p>
+      </footer>
+    </div>
   );
 }
 
