@@ -5,7 +5,7 @@ function App() {
     <div className="app-container">
       <header>
         <div className="logo fade-in">
-          <span className="logo-text creepy">Fearful Pursuit</span>
+          <span className="logo-text creepy">Frightful Pursuit</span>
         </div>
       </header>
       <main>
