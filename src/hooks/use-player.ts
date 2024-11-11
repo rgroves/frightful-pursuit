@@ -3,7 +3,7 @@ import { createContext } from "react";
 
 interface PlayerContextType {
   playerInfo: PlayerInfo;
-  setPlayerInfo: React.Dispatch<React.SetStateAction<PlayerInfo>> | null;
+  setPlayerInfo: React.Dispatch<React.SetStateAction<PlayerInfo>>;
 }
 
 export const PlayerContext = createContext<PlayerContextType | null>(null);

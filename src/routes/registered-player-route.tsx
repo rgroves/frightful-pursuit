@@ -1,13 +1,15 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
+interface RegisteredPlayerRouteProps {
+  playerInfo: PlayerInfo;
+  children: React.JSX.Element;
+}
+
 export default function RegisteredPlayerRoute({
   playerInfo,
   children,
-}: {
-  playerInfo: PlayerInfo;
-  children: React.JSX.Element;
-}) {
+}: RegisteredPlayerRouteProps) {
   if (!playerInfo.playerId) {
     return <Navigate to="/" />;
   }

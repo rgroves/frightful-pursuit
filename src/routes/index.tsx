@@ -1,78 +1,38 @@
 import { useMutation } from "convex/react";
-import { useEffect, useRef, useState } from "react";
-import { Form } from "react-router-dom";
+import { useState } from "react";
+import { Navigate } from "react-router-dom";
 import { api } from "../../convex/_generated/api";
 import PlayerProvider from "../components/player-provider";
-import usePlayer from "../hooks/use-player";
+import PlayerRegistrationForm from "../components/player-registration-form";
+import PlayerResetForm from "../components/player-reset-form";
 import useLocalPlayerInfo from "../hooks/use-local-player-info";
-
-function PlayerRegistrationForm({
-  onPlayerRegistered,
-}: {
-  onPlayerRegistered: (player: PlayerInfo) => void;
-}) {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [nickname, setNickname] = useState("");
-  const registerPlayerMutation = useMutation(api.players.registerPlayer);
-
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
-
-  return (
-    <Form
-      onSubmit={(e) => {
-        e.preventDefault();
-
-        const registerPlayer = async (nickname: string) => {
-          const player = await registerPlayerMutation({
-            playerNickname: nickname,
-          });
-          onPlayerRegistered({
-            playerId: player.id,
-            nickname: player.nickname,
-          });
-        };
-
-        registerPlayer(nickname).catch((error: unknown) => {
-          console.error(error);
-        });
-      }}
-    >
-      <input
-        ref={inputRef}
-        name="nickname"
-        type="text"
-        required
-        minLength={2}
-        maxLength={20}
-        onChange={(e) => {
-          setNickname(e.target.value);
-        }}
-        value={nickname}
-      />
-      <button type="submit">Register</button>
-    </Form>
-  );
-}
+import usePlayer from "../hooks/use-player";
 
 export function Index() {
+  const registerPlayerMutation = useMutation(api.players.registerPlayer);
   const { playerInfo, setPlayerInfo } = usePlayer();
+  const [shouldRedirectToLobby, setShouldRedirectToLobby] = useState(false);
 
-  const NewPlayerForm = (
-    <Form
-      onSubmit={(e) => {
-        e.preventDefault();
-        if (!setPlayerInfo) {
-          throw new Error("Unable to set Player Info.");
-        }
-        setPlayerInfo({ playerId: undefined, nickname: "" });
-      }}
-    >
-      <input name="newPlayer" type="checkbox" hidden readOnly checked />
-      <button type="submit">New Player</button>
-    </Form>
-  );
+  const handlePlayerRegistered = (nickname: string) => {
+    const registerPlayer = async (nickname: string) => {
+      const player = await registerPlayerMutation({
+        playerNickname: nickname,
+      });
+      setPlayerInfo({
+        playerId: player.id,
+        nickname: player.nickname,
+      });
+      setShouldRedirectToLobby(true);
+    };
+
+    registerPlayer(nickname).catch((error: unknown) => {
+      console.error(error);
+    });
+  };
+
+  if (shouldRedirectToLobby) {
+    return <Navigate to="/lobby" />;
+  }
 
   return (
     <>
@@ -84,18 +44,14 @@ export function Index() {
       </p>
       {playerInfo.playerId ?
         <>
-          <button>Play</button>
-          {NewPlayerForm}
+          <PlayerResetForm
+            onPlayerReset={() => {
+              setPlayerInfo({ nickname: "" });
+              setShouldRedirectToLobby(false);
+            }}
+          />
         </>
-      : <PlayerRegistrationForm
-          onPlayerRegistered={(player) => {
-            if (!setPlayerInfo) {
-              throw new Error("Unable to set Player Info.");
-            }
-            setPlayerInfo(player);
-          }}
-        />
-      }
+      : <PlayerRegistrationForm onPlayerRegistered={handlePlayerRegistered} />}
     </>
   );
 }
