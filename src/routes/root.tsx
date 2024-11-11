@@ -13,7 +13,7 @@ export default function Root() {
       </main>
       <footer>
         <p>
-          Made with ❤️, 🧠, and ☕ in Chicago, IL, USA - using Astro, React,
+          Made with ❤️, 🧠, and ☕ in Chicago, IL, USA - using React,
           TypeScript, and Convex.
         </p>
       </footer>
