@@ -1,6 +1,6 @@
 import PlayerProvider from "../components/player-provider";
 import usePlayer from "../hooks/use-player";
-import usePlayerInfo from "../hooks/use-player-info";
+import useLocalPlayerInfo from "../hooks/use-local-player-info";
 import RegisteredPlayerRoute from "./registered-player-route";
 
 function Lobby() {
@@ -11,7 +11,7 @@ function Lobby() {
 }
 
 export default function LobbyWithPlayerInfo() {
-  const [playerInfo] = usePlayerInfo();
+  const [playerInfo] = useLocalPlayerInfo();
 
   return (
     <PlayerProvider playerInfo={playerInfo}>

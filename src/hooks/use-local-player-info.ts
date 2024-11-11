@@ -38,7 +38,7 @@ function validatePlayerInfo(playerInfo: unknown): playerInfo is PlayerInfo {
   return true;
 }
 
-export default function usePlayerInfo(): [
+export default function useLocalPlayerInfo(): [
   PlayerInfo,
   React.Dispatch<React.SetStateAction<PlayerInfo>>,
 ] {

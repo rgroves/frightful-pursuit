@@ -4,7 +4,7 @@ import { Form } from "react-router-dom";
 import { api } from "../../convex/_generated/api";
 import PlayerProvider from "../components/player-provider";
 import usePlayer from "../hooks/use-player";
-import usePlayerInfo from "../hooks/use-player-info";
+import useLocalPlayerInfo from "../hooks/use-local-player-info";
 
 function PlayerRegistrationForm({
   onPlayerRegistered,
@@ -101,7 +101,7 @@ export function Index() {
 }
 
 export default function IndexWithPlayerInfo() {
-  const [playerInfo, setPlayerInfo] = usePlayerInfo();
+  const [playerInfo, setPlayerInfo] = useLocalPlayerInfo();
 
   return (
     <PlayerProvider playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}>
