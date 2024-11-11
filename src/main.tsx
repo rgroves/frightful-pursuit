@@ -1,10 +1,10 @@
+import { ConvexProvider, ConvexReactClient } from "convex/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import RegisteredPlayerRoute from "./routes/registered-player-route.tsx";
-import Game from "./routes/game.tsx";
-import Index from "./routes/index.tsx";
-import Lobby from "./routes/lobby.tsx";
+import GameWithPlayerInfo from "./routes/game.tsx";
+import IndexWithPlayerInfo from "./routes/index.tsx";
+import LobbyWithPlayerInfo from "./routes/lobby.tsx";
 import Root from "./routes/root.tsx";
 import "./index.css";
 
@@ -14,22 +14,17 @@ const router = createBrowserRouter(
       path: "/",
       element: <Root />,
       children: [
-        { index: true, element: <Index /> },
+        {
+          index: true,
+          element: <IndexWithPlayerInfo />,
+        },
         {
           path: "lobby",
-          element: (
-            <RegisteredPlayerRoute>
-              <Lobby />
-            </RegisteredPlayerRoute>
-          ),
+          element: <LobbyWithPlayerInfo />,
         },
         {
           path: "game",
-          element: (
-            <RegisteredPlayerRoute>
-              <Game />
-            </RegisteredPlayerRoute>
-          ),
+          element: <GameWithPlayerInfo />,
         },
       ],
     },
@@ -45,13 +40,17 @@ const router = createBrowserRouter(
   },
 );
 
+const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL as string);
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider
-      router={router}
-      future={{
-        v7_startTransition: true,
-      }}
-    />
+    <ConvexProvider client={convex}>
+      <RouterProvider
+        router={router}
+        future={{
+          v7_startTransition: true,
+        }}
+      />
+    </ConvexProvider>
   </StrictMode>,
 );

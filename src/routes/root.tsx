@@ -7,13 +7,6 @@ export default function Root() {
         <div className="logo fade-in">
           <span className="logo-text creepy">Frightful Pursuit</span>
         </div>
-        <nav>
-          <ul>
-            <li>
-              <a href="#">Register</a>
-            </li>
-          </ul>
-        </nav>
       </header>
       <main>
         <Outlet />
