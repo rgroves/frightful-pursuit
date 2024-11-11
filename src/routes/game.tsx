@@ -1,4 +1,5 @@
-import { PlayerProvider, usePlayer } from "../components/player-provider";
+import PlayerProvider from "../components/player-provider";
+import usePlayer from "../hooks/use-player";
 import usePlayerInfo from "../hooks/use-player-info";
 import RegisteredPlayerRoute from "./registered-player-route";
 

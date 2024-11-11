@@ -2,7 +2,8 @@ import { useMutation } from "convex/react";
 import { useEffect, useRef, useState } from "react";
 import { Form } from "react-router-dom";
 import { api } from "../../convex/_generated/api";
-import { PlayerProvider, usePlayer } from "../components/player-provider";
+import PlayerProvider from "../components/player-provider";
+import usePlayer from "../hooks/use-player";
 import usePlayerInfo from "../hooks/use-player-info";
 
 function PlayerRegistrationForm({
@@ -33,7 +34,9 @@ function PlayerRegistrationForm({
           });
         };
 
-        registerPlayer(nickname);
+        registerPlayer(nickname).catch((error: unknown) => {
+          console.error(error);
+        });
       }}
     >
       <input
@@ -43,7 +46,9 @@ function PlayerRegistrationForm({
         required
         minLength={2}
         maxLength={20}
-        onChange={(e) => setNickname(e.target.value)}
+        onChange={(e) => {
+          setNickname(e.target.value);
+        }}
         value={nickname}
       />
       <button type="submit">Register</button>

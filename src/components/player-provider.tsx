@@ -1,30 +1,14 @@
-import { createContext, useContext } from "react";
+import React from "react";
+import { PlayerContext } from "../hooks/use-player";
 
-interface PlayerContextType {
-  playerInfo: PlayerInfo;
-  setPlayerInfo: React.Dispatch<React.SetStateAction<PlayerInfo>> | null;
-}
-
-const PlayerContext = createContext<PlayerContextType | null>(null);
-
-export function usePlayer() {
-  const context = useContext(PlayerContext);
-
-  if (!context) {
-    throw new Error("usePlayer must be used within a PlayerProvider");
-  }
-
-  return context;
-}
-
-export function PlayerProvider({
+export default function PlayerProvider({
   playerInfo,
   setPlayerInfo = null,
   children,
 }: {
   playerInfo: PlayerInfo;
   setPlayerInfo?: React.Dispatch<React.SetStateAction<PlayerInfo>> | null;
-  children: JSX.Element;
+  children: React.JSX.Element;
 }) {
   return (
     <PlayerContext.Provider value={{ playerInfo, setPlayerInfo }}>
