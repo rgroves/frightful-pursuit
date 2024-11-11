@@ -5,6 +5,8 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 import react from "eslint-plugin-react";
 
+import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended"
+
 export default tseslint.config(
   { ignores: ["dist"] },
   {
@@ -12,8 +14,10 @@ export default tseslint.config(
       js.configs.recommended,
       ...tseslint.configs.strictTypeChecked,
       ...tseslint.configs.stylisticTypeChecked,
+      eslintPluginPrettierRecommended,
     ],
     files: ["**/*.{ts,tsx}"],
+    ignores: ["convex/_generated/**/*.{js,ts,tsx}"],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
@@ -28,7 +32,6 @@ export default tseslint.config(
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
     },
-    extends: ["plugin:prettier/recommended"],
     rules: {
       ...reactHooks.configs.recommended.rules,
       "react-refresh/only-export-components": [
