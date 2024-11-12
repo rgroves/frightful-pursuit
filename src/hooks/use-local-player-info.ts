@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { PlayerInfo } from "../types";
 
 const anonymousPlayerInfo = { nickname: "" };
 const key = "frightfulPursuit_playerInfo";

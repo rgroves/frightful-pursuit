@@ -1,5 +1,14 @@
-import { mutation } from "./_generated/server";
 import { ConvexError, v } from "convex/values";
+import { mutation, query } from "./_generated/server";
+
+export const get = query({
+  args: {
+    playerId: v.id("Players"),
+  },
+  handler: async (ctx, { playerId }) => {
+    return await ctx.db.get(playerId);
+  },
+});
 
 export const registerPlayer = mutation({
   args: {

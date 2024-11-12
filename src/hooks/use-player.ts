@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { createContext } from "react";
+import { PlayerInfo } from "../types";
 
 interface PlayerContextType {
   playerInfo: PlayerInfo;

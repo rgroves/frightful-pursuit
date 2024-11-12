@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+import { PlayerInfo } from "../types";
 
 interface RegisteredPlayerRouteProps {
   playerInfo: PlayerInfo;
@@ -14,5 +15,5 @@ export default function RegisteredPlayerRoute({
     return <Navigate to="/" />;
   }
 
-  return <>{children};</>;
+  return <>{children}</>;
 }

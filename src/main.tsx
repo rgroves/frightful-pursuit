@@ -8,6 +8,8 @@ import LobbyWithPlayerInfo from "./routes/lobby.tsx";
 import Root from "./routes/root.tsx";
 import "./index.css";
 
+// TODO(rgroves): Add a better 404 experience, ex: http://localhost:5173/gamex
+
 const router = createBrowserRouter(
   [
     {

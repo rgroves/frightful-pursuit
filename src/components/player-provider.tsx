@@ -1,5 +1,6 @@
 import React from "react";
 import { PlayerContext } from "../hooks/use-player";
+import { PlayerInfo } from "../types";
 
 interface PlayerProviderProps {
   playerInfo: PlayerInfo;
