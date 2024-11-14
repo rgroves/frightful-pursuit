@@ -8,17 +8,19 @@ interface PlayerProviderProps {
   children: React.JSX.Element;
 }
 
+const setPlayerInfoStub = () => {
+  // If you are seeing this error in the console: check if the route
+  // generating the error truly needs to call setPlayerInfo. If so, ensure
+  // that in the [RoutName]WithPlayerInfo component that setPlayerInfo is
+  // being passed as a prop to the PlayerProvider.
+  const msg = "Invalid PlayerProvider state: setPlayerInfo not set.";
+  console.error(msg);
+  throw new Error(msg);
+};
+
 export default function PlayerProvider({
   playerInfo,
-  setPlayerInfo = () => {
-    // If you are seeing this error in the console: check if the route
-    // generating the error truly needs to call setPlayerInfo. If so, ensure
-    // that in the [RoutName]WithPlayerInfo component that setPlayerInfo is
-    // being passed as a prop to the PlayerProvider.
-    const msg = "Invalid PlayerProvider state: setPlayerInfo not set.";
-    console.error(msg);
-    throw new Error(msg);
-  },
+  setPlayerInfo = setPlayerInfoStub,
   children,
 }: PlayerProviderProps) {
   return (
